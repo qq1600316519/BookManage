@@ -1,11 +1,15 @@
 #主文件
-from flask import Flask
+from flask import Flask, url_for
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import backref
-
+from home import home_blue
 app = Flask(__name__)
+
+#注册蓝图路由
+app.register_blueprint(home_blue)
+
 #配置数据库
 # 设置数据库连接地址
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:mysql@127.0.0.1:3306/bookmanage"
@@ -21,6 +25,7 @@ mgr = Manager(app)
 Migrate(app,db)
 #使用管理器管理迁移器　
 mgr.add_command("mc",MigrateCommand)
+
 
 #创建作者表
 class Author(db.Model):
@@ -49,6 +54,7 @@ class Book(db.Model):
 
 
 if __name__ == '__main__':
+    print(app.url_map)
     mgr.run()
 
 
