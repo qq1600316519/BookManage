@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+body{
+    background:url(/static/1.jpg) no-repeat;
+    color:white;
+}
+</style>
 <body>
 
 <h1>图书管理</h1>
@@ -20,12 +26,12 @@
 
     {% for author in authors %}
 
-        <li>{{ author.name }}<a href=""> 删除</a></li>
+        <li>{{ author.name }}<a href="/delete_author/{{ author.id }}"> 删除</a></li>
         <ul>
 
             {% for book in author.books %}
 
-            <li>{{ book.name }}<a href=""> 删除</a></li>
+            <li>{{ book.name }}<a href="/delete_book/{{ book.id }}"> 删除</a></li>
 
             {% endfor %}
 

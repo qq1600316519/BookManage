@@ -12,7 +12,6 @@ app.secret_key = "test"
 
 #注册蓝图路由
 app.register_blueprint(home_blue)
-
 #配置数据库
 # 设置数据库连接地址
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:mysql@127.0.0.1:3306/bookmanage"

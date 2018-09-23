@@ -34,32 +34,34 @@ def index():
         #判断数据库中是否存在作者名,不存在返回Ｎｏｎｅ
         try:
             author = Author.query.filter(Author.name==author_name).first()
-        except BaseException:
-            flash("数据库正在升级中!")
-            return  redirect(url_for("home_blue.index"))
 
-        # 存在，只添加图书名
-        if author:
-            # 创建一条图书记录
-            add_book = Book(name=book_name)
-            #添加到作者的关联属性中
-            author.books.append(add_book)
-            #提交
-            db.session.add(add_book)
-            db.session.commit()
-            return redirect(url_for("home_blue.index"))
-        #不存在,添加作者名　和　图书名　到数据库
-        else:
-            #创建一条作者记录
-            add_author = Author(name=author_name)
-            #创建一条图书记录
-            add_book = Book(name=book_name)
-            #添加到作者的关联属性中
-            add_author.books.append(add_book)
-            #提交
-            db.session.add(add_book)
-            db.session.commit()
-            return redirect(url_for("home_blue.index"))
+            # 存在，只添加图书名
+            if author:
+                # 创建一条图书记录
+                add_book = Book(name=book_name)
+                #添加到作者的关联属性中
+                author.books.append(add_book)
+                #提交
+                db.session.add(add_book)
+                db.session.commit()
+                return redirect(url_for("home_blue.index"))
+            #不存在,添加作者名　和　图书名　到数据库
+            else:
+                #创建一条作者记录
+                add_author = Author(name=author_name)
+                #创建一条图书记录
+                add_book = Book(name=book_name)
+                #添加到作者的关联属性中
+                add_author.books.append(add_book)
+                #提交
+                db.session.add(add_book)
+                db.session.commit()
+
+        except Exception:
+            db.session.rollback()
+            flash("数据库正在升级中!")
+
+        return redirect(url_for("home_blue.index"))
 
 
 

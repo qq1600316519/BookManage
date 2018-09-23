@@ -3,3 +3,4 @@ from flask import Blueprint
 home_blue = Blueprint("home_blue",__name__)
 
 from  .index import *
+from  .delete import *
