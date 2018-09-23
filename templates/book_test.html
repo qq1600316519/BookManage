@@ -16,22 +16,27 @@
 
 <hr>
 
-{#<ul>#}
-{#    {% for author in authors %}#}
-{##}
-{#        <li>{{ author.name }}<a href="/delete_author/{{ author.id }}"> 删除</a></li>#}
-{#        <ul>#}
-{#            {% for book in author.books %}#}
-{#                <li>{{ book.name }} <a href="/delete_book/{{ book.id }}"> 删除</a></li>#}
-{##}
-{#            {% endfor %}#}
-{##}
-{#        </ul>#}
-{#    {% endfor %}#}
-{##}
-{#</ul>#}
+<ul>
 
+    {% for author in authors %}
 
+        <li>{{ author.name }}<a href=""> 删除</a></li>
+        <ul>
+
+            {% for book in author.books %}
+
+            <li>{{ book.name }}<a href=""> 删除</a></li>
+
+            {% endfor %}
+
+        </ul>
+    {% endfor %}
+
+</ul>
+
+{% for get_flashed_message in get_flashed_messages() %}
+    <script>alert("{{ get_flashed_message }}")</script>
+{% endfor %}
 
 </body>
 </html>

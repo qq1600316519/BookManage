@@ -7,6 +7,9 @@ from sqlalchemy.orm import backref
 from home import home_blue
 app = Flask(__name__)
 
+#设置ｓｅｓｓｉｏｎ秘钥
+app.secret_key = "test"
+
 #注册蓝图路由
 app.register_blueprint(home_blue)
 
@@ -47,7 +50,7 @@ class Book(db.Model):
     #主键字段
     id = db.Column(db.Integer,primary_key=True)
     #图书名字段
-    name = db.Column(db.String(50),unique=True)
+    name = db.Column(db.String(50))
     #外键,关联作者
     author_id = db.Column(db.Integer,db.ForeignKey("author.id"))
 
